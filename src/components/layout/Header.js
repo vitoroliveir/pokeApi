@@ -1,18 +1,18 @@
 import styles from './Header.module.css'
-
-
+import Search from './Search'
 
 function Header() {
   return (
-    <header className={styles.Header}>
-        
+    <header className={styles.Header}> 
         <div>
+        <a href={`${"/"}`}> 
             <p>
               PokeApi
             </p>
+        </a>
         </div>
         
-        
+        <Search/>
     </header>
   )
 }

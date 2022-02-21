@@ -1,4 +1,4 @@
-import styles from './Content.module.css'
+import styles from './Home.module.css'
 import { useState, useEffect } from 'react'
 
 function Content() {
@@ -8,19 +8,24 @@ function Content() {
 
   const options = {
     method: 'GET',
-    mode: "cors",
-    cache: 'default'
+    headers: {
+      'Content-Type': 'application/json',
+    },
   }
 
-  const loadingPokemons = () => {
-    fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20", options)
+
+  const loadingPokemons =  () => {
+    fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=15", options)
       .then(response => {
         return response.json()
       }).then((data) => {
         setPokemons(data.results)
         setNextPokemons(data.next)
         setPreviousPokemons(data.previous)
+
       })
+
+
   }
 
 
@@ -28,13 +33,15 @@ function Content() {
     loadingPokemons()
   }, [])
 
+
+
   const clearPokemons = () => {
     while (pokemons.length) {
       pokemons.pop();
     }
   }
 
-  const nextLoading = () => {
+  const nextLoading =  () => {
     clearPokemons()
 
     fetch(`${nextPokemons}`, options)
@@ -63,15 +70,19 @@ function Content() {
   }
 
 
+
+
   return (
     <div className={styles.Content}>
-
       <ul>
         {pokemons.map(({ name }) => (
-          <li>{name}</li>
-        ))}
+          <div className={styles.Pokemon}>
+            <img src={`https://img.pokemondb.net/artwork/large/${name}.jpg`} />
+            <li key={name} >{name}</li>
+          </div>
+        ))
+        }
       </ul>
-
 
       <div className={styles.Button}>
         <button onClick={previousLoading} >
@@ -83,7 +94,6 @@ function Content() {
         </button>
 
       </div>
-
     </div>
   )
 }

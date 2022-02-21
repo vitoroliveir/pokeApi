@@ -10,7 +10,12 @@
     height: 60px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: rgb(220, 227, 233);
+    justify-content: flex-start;
     font-size: 30px;
+    padding-left: 55px;
+}
+
+.Header a{
+    text-decoration: none;
+    color: rgb(220, 227, 233);
 }

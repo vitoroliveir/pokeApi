@@ -1,6 +1,6 @@
 import styles from './Footer.module.css'
 
-function Feed() {
+function Footer() {
   return (
     <div className={styles.Footer}>
         <p>
@@ -10,4 +10,4 @@ function Feed() {
   )
 }
 
-export default Feed
+export default Footer
