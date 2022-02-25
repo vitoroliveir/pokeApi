@@ -1,7 +1,7 @@
-import Home from './components/layout/Home';
+import Home from './components/pages/Home';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header'
-import Result from './components/layout/ResultSearch';
+import Result from './components/pages/ResultSearch';
 import React from 'react';
 import {
   BrowserRouter,
