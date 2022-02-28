@@ -5,7 +5,6 @@
     box-sizing: border-box
 }
 
-
 ul{
     display: flex;
     align-items: center;
@@ -14,6 +13,7 @@ ul{
     list-style: none;
     padding: 35px;
 }
+
 
 .Pokemon{
     border: solid 1px black;
@@ -49,5 +49,5 @@ button{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-bottom: 45PX;
+    
 }
