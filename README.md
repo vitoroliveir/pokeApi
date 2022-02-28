@@ -1,6 +1,8 @@
 
-<img src=“https://user-images.githubusercontent.com/26968863/155910417-33d34fae-8bd3-4303-8b0a-8fde55af34ad.PNG” alt=“exemplo”>
 
 
+<img src="https://user-images.githubusercontent.com/26968863/155910614-4d2c6c19-621e-48eb-826e-71973a540b44.PNG" alt=“exemplo” height="650" width="850">
 
+
+Exemplo:
 https://poke-api-lovat.vercel.app/
