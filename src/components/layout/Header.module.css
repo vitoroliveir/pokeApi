@@ -1,12 +1,6 @@
-* {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    box-sizing: border-box
-}
 
 .Header{
-    background-color: rgb(208, 89, 26);
+    background-color:var(--color-background-header) ;
     height: 65px;
     display: flex;
     align-items: center;

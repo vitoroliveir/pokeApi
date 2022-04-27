@@ -1,4 +1,7 @@
+import '../../styles/settings/colors.css'
+import '../../styles/gereric/reset.css'
 import styles from './Header.module.css'
+
 import Search from './Search'
 
 function Header() {
@@ -7,7 +10,7 @@ function Header() {
         <div>
         <a href={`${"/"}`}> 
             <p>
-              PokeApi
+              PokeApi1
             </p>
         </a>
         </div>
