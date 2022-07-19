@@ -15,7 +15,7 @@ function Search() {
     setPokemon(e.target.value)
   }
 
-  const click = () => {
+  function handleClick() {
     
    document.addEventListener("click",()=>{
       if(className == styles.SearchText){
@@ -28,7 +28,7 @@ function Search() {
   
   return (
     <div className={styles.SearchBox}   >
-        <input className={className} type="text" onChange={onChange} id="input" onclick={click()}  ref={nameInputRef} placeholder='Pesquise um pokemon'/>
+        <input className={className} type="text" onChange={onChange} id="input" onClick={handleClick}  ref={nameInputRef} placeholder='Pesquise um pokemon'/>
         <a className={styles.SearchBtn}  href={`${pokemon?"/result/" + pokemon: "/"}`}>
             <img src={Loupe} alt="lupa" height={20} width={20}/>
         </a>
