@@ -71,7 +71,7 @@ function Content() {
   }
 
   return (
-    <div>
+    <div className={styles.Home}>
     {!removeLoading ? (<Loading />
     ):(removeLoading && <div className={styles.Content}>
           <ul>

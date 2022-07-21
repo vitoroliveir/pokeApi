@@ -7,22 +7,29 @@
 }
 
 
+
+
 ul{
     display: flex;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     list-style: none;
-    padding: 35px;
+   
 }
 
+.Home{
+
+    padding: 50px;
+    
+}
 
 .Pokemon{
     border: solid 1px black;
     margin: 6px;
     padding: 15px;
     height: 120px;
-    width: 30%;
+    width: 32%;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -37,12 +44,19 @@ ul{
     animation-fill-mode: forwards;
 
 }
-@media (max-width: 445px)
-{
+
+@media (max-width: 1032px) {
+    .Home{
+
+        padding-left: 15%;
+        
+    }
+
     .Pokemon{
-        width: 45%;
+        width: 40%;
     }
 }
+
 
 .Pokemon img{
     height: 70px;
@@ -74,3 +88,5 @@ button{
         transform: translateX(0);
     }
 }
+
+

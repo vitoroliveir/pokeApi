@@ -10,7 +10,7 @@ function Header() {
         <div>
         <a href={`${"/"}`}> 
             <p>
-              PokeApi1
+              PokeApi
             </p>
         </a>
         </div>

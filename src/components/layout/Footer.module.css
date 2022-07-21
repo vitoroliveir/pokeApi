@@ -13,8 +13,10 @@
     align-items: center;
     justify-content: center;
     align-content: flex-end;
-    position:absolute;
-	bottom:0;
+    bottom: 0;
+    position: fixed;
+ 
+    
     margin-top: 83px;
     
 }

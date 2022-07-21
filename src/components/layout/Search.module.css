@@ -17,6 +17,10 @@
     color: #1e3754;
 }
 
+input{
+    height: 50px;
+}
+
 .SearchText{
     border: none;
     background: none;
