@@ -5,4 +5,4 @@
 
 
 Exemplo:
-https://poke-api-lovat.vercel.app/
+https://pokeapi-react2.vercel.app/
