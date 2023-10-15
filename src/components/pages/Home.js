@@ -1,100 +1,120 @@
 import styles from './Home.module.css'
 import { useState, useEffect } from 'react'
 import Loading from '../layout/Loading'
+import axios from 'axios';
 
 function Content() {
   const [pokemons, setPokemons] = useState([])
+  const [pokemonDetails, SetPokemonDetails] = useState([])
   const [nextPokemons, setNextPokemons] = useState()
   const [previousPokemons, setPreviousPokemons] = useState()
   const [removeLoading, setRemoveLoading] = useState(true)
 
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  const loadingPokemons = async () => {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=12`)
+    const results = response.data.results;
+    setPokemons(results)
+    setNextPokemons(response.data.next)
+    setPreviousPokemons(response.data.previous)
+    const dataPromises = results.map(async (result) => {
+      const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${result.name}`);
+      return pokemonResponse.data;
+    });
+
+    const data = await Promise.all(dataPromises);
+    SetPokemonDetails(data);
+
   }
 
-  const loadingPokemons =  () => {
-    fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=15", options)
-      .then(response => {
-        return response.json()
-      }).then((data) => {
-        setPokemons(data.results)
-        setNextPokemons(data.next)
-        setPreviousPokemons(data.previous)
-      })
-  }
 
   useEffect(() => {
     loadingPokemons()
   }, [])
 
 
+
   const clearPokemons = () => {
     while (pokemons.length) {
       pokemons.pop();
+      pokemonDetails.pop();
     }
   }
 
-  const nextLoading =  () => {
+  const nextLoading = () => {
     clearPokemons()
     setRemoveLoading(false)
 
-    setTimeout(
-      fetch(`${nextPokemons}`, options)
-        .then(response => {
-          return response.json()
-        }).then((data) => {
-          setPokemons(data.results)
-          setNextPokemons(data.next)
-          setPreviousPokemons(data.previous)
-          setRemoveLoading(true)
-        }),
-      8,
-      )
+    setTimeout(async () => {
+      const responseNext = await axios.get(`${nextPokemons}`)
+      const resultsNext = responseNext.data.results;
+      setPokemons(resultsNext)
+      setNextPokemons(responseNext.data.next)
+      setPreviousPokemons(responseNext.data.previous)
+      const dataPromises = resultsNext.map(async (result) => {
+        const pokemonResponseNext = await axios.get(`https://pokeapi.co/api/v2/pokemon/${result.name}`);
+        return pokemonResponseNext.data;
+      });
+
+      const data = await Promise.all(dataPromises);
+      SetPokemonDetails(data);
+      setRemoveLoading(true)
+
+    }, 8
+    )
 
   }
 
-  const previousLoading = () => {
+  const previousLoading = async () => {
     clearPokemons()
 
-      fetch(`${previousPokemons}`, options)
-        .then(response => {
-          return response.json()
-        }).then((data) => {
-          setPokemons(data.results)
-          setNextPokemons(data.next)
-          setPreviousPokemons(data.previous)
-          
-        })
+    if (previousPokemons != null) {
+      const responsePrevious = await axios.get(`${previousPokemons}`)
+      const resultsPrevious = responsePrevious.data.results;
+      setPokemons(resultsPrevious)
+      setNextPokemons(responsePrevious.data.next)
+      setPreviousPokemons(responsePrevious.data.previous)
+      const dataPromises = resultsPrevious.map(async (result) => {
+        const pokemonresultsPrevious = await axios.get(`https://pokeapi.co/api/v2/pokemon/${result.name}`);
+        return pokemonresultsPrevious.data;
+      });
+
+      const data = await Promise.all(dataPromises);
+      SetPokemonDetails(data);
+    }
+
   }
 
+  function capitalizarPrimeiraLetra(nome) {
+    return nome.charAt(0).toUpperCase() + nome.slice(1);
+  }
+  
   return (
     <div className={styles.Home}>
-    {!removeLoading ? (<Loading />
-    ):(removeLoading && <div className={styles.Content}>
-          <ul>
-            {pokemons.map(({ name }) => (
-              <div className={styles.Pokemon}>
-                <img src={`https://img.pokemondb.net/artwork/large/${name}.jpg`} />
-                <li key={name} >{name}</li>
-              </div>
-            ))
-            }
-          </ul>
+      {!removeLoading ? (<Loading />
+      ) : (removeLoading && <div className={styles.Content}>
+        <ul>
+          {pokemonDetails.map(({ name, id,types }) => (
+   
+            <div className={`${styles.Pokemon} `}>
+              <img src={`https://img.pokemondb.net/artwork/large/${name}.jpg`} />
+              <li key={name} className={`${styles.Number}`}>#{id}</li>
+              <li key={id}>{capitalizarPrimeiraLetra(name)} </li>
+            </div>
+          ))
+          }
+        </ul>
 
-          <div className={styles.Button}>
-            <button onClick={previousLoading} >
-              Anterior
-            </button>
+        <div className={styles.Button}>
+          <button onClick={previousLoading} >
+            Anterior
+          </button>
 
-            <button onClick={nextLoading} >
-              Proximo
-            </button>
-        
-          </div>
+          <button onClick={nextLoading} >
+            Proximo
+          </button>
+
         </div>
+      </div>
       )}
     </div>
   )

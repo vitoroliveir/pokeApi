@@ -3,36 +3,43 @@ import Loupe from '../../img/loupe.svg'
 import { React, useEffect, useRef, useState } from 'react'
 
 function Search() {
-  const [pokemon , setPokemon] = useState('')
+  const [pokemon, setPokemon] = useState('')
   const nameInputRef = useRef()
-  const [className,  setClassName] = useState(styles.SearchText)
+  const [className, setClassName] = useState(styles.SearchText)
 
-  useEffect(()=>{
+  useEffect(() => {
     nameInputRef.current.focus();
-  },[])
+  }, [])
 
-  function onChange(e){
+  function onChange(e) {
     setPokemon(e.target.value)
   }
 
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      console.log('A tecla Enter foi pressionada!');
+      window.location.href = `${pokemon ? "/result/" + pokemon.toLowerCase() : "/"}`;
+    }
+  }
   function handleClick() {
-    
-   document.addEventListener("click",()=>{
-      if(className == styles.SearchText){
+
+    document.addEventListener("click", () => {
+      if (className == styles.SearchText) {
         setClassName(styles.SearchClick)
-      }else{
+      } else {
         setClassName(styles.SearchText)
       }
     })
-   }
-  
+  }
+
+
   return (
-    <div className={styles.SearchBox}   >
-        <input className={className} type="text" onChange={onChange} id="input" onClick={handleClick}  ref={nameInputRef} placeholder='Pesquise um pokemon'/>
-        <a className={styles.SearchBtn}  href={`${pokemon?"/result/" + pokemon: "/"}`}>
-            <img src={Loupe} alt="lupa" height={20} width={20}/>
-        </a>
-        
+    <div onKeyDown={handleKeyDown} className={styles.SearchBox}   >
+      <input className={className} type="text" onChange={onChange} id="input" onClick={handleClick} ref={nameInputRef} placeholder='Pesquise um pokemon' />
+      <a className={styles.SearchBtn} href={`${pokemon ? "/result/" + pokemon : "/"}`}>
+        <img src={Loupe} alt="lupa" height={20} width={20} />
+      </a>
+
     </div>
   )
 }

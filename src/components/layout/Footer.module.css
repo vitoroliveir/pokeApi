@@ -14,10 +14,7 @@
     justify-content: center;
     align-content: flex-end;
     bottom: 0;
-    position: fixed;
- 
-    
-    margin-top: 83px;
+    position: relative;
     
 }
 
