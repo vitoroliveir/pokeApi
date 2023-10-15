@@ -8,7 +8,7 @@ function Content() {
   const [pokemonDetails, SetPokemonDetails] = useState([])
   const [nextPokemons, setNextPokemons] = useState()
   const [previousPokemons, setPreviousPokemons] = useState()
-  const [removeLoading, setRemoveLoading] = useState(true)
+  const [removeLoading, setRemoveLoading] = useState(false)
 
   const loadingPokemons = async () => {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=12`)
@@ -23,6 +23,7 @@ function Content() {
 
     const data = await Promise.all(dataPromises);
     SetPokemonDetails(data);
+    setRemoveLoading(true)
 
   }
 

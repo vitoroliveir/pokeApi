@@ -18,7 +18,12 @@ ul{
 }
 
 .Home{
-    padding: 50px;
+    /* padding: 50px; */
+    position: relative;
+    top: 30px;
+    min-height: 91vh;
+
+    
 
 }
 
@@ -45,11 +50,12 @@ ul{
 
 @media (max-width: 1032px) {
     .Home{
-        padding-left: 5%;
+        top: 0;
+        padding-bottom: 35px;
     }
-
+   
     .Pokemon{
-        width: 30%;
+        width: 40%;
     }
 }
 
