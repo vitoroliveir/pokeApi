@@ -7,6 +7,15 @@
     box-sizing: border-box;
 }
 
+.Error{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin-top: 35%;
+    font-size: 20px;
+    font-family:'Open Sans' ;
+}
+
 .pokemon_container {
     text-align: center;
     height: 89.5vh;
